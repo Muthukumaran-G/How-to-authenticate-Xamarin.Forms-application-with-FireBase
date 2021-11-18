@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewModel="clr-namespace:FirebaseContacts"
+             x:Class="FirebaseContacts.SignupPage">
+    <ContentPage.BindingContext>
+        <viewModel:SignUpPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid BackgroundColor="AntiqueWhite">
+        <Frame BackgroundColor="#d3d3d3" IsVisible="{Binding IsBusy}">
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Label Text="Creating account..." FontSize="35" TextColor="Black"/>
+                <ActivityIndicator IsRunning="True" Color="DeepSkyBlue" IsEnabled="True"/>
+            </StackLayout>
+        </Frame>
+        <Grid x:Name="MainGrid">
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid" Binding="{Binding IsBusy}" Value="True">
+                    <Setter Property="Opacity" Value="0.2"/>
+                </DataTrigger>
+                <DataTrigger TargetType="Grid" Binding="{Binding IsBusy}" Value="False">
+                    <Setter Property="Opacity" Value="1"/>
+                </DataTrigger>
+            </Grid.Triggers>
+            <Frame BackgroundColor="Orange" ScaleX="0.75" ScaleY="1.5" TranslationX="75" Rotation="130"/>
+            <Image
+                    Grid.Row="0"
+                    Aspect="Fill"
+                    Source="Help" />
+            <StackLayout
+                    Grid.Row="0"
+                    Padding="0,0,0,0"
+                    BackgroundColor="Transparent">
+                <Image x:Name="Logo"
+                        Opacity="0"
+                        TranslationY="-40"
+                        WidthRequest="80"
+                        HeightRequest="80"
+                        Source="care_india_icon"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand" />
+                <StackLayout
+                        Opacity="0"
+                        x:Name="MainStack"
+                        TranslationY="40"
+                        Margin="50,0,50,0"
+                        Spacing="10"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="CenterAndExpand">
+                    <Label
+                            FontAttributes="Bold"
+                            Text="SIGN UP"
+                            TextColor="White"
+                            HorizontalOptions="CenterAndExpand" />
+
+                    <viewModel:CustomAnimatedView
+                            Padding="10,0,0,0"
+                            HeightRequest="52"
+                            BackgroundColor="White"
+                            CornerRadius="5"
+                            HorizontalOptions="FillAndExpand">
+                        <viewModel:BorderlessEntry TextColor="Black"
+                                FontSize="14"
+                                Placeholder="Name"
+                                PlaceholderColor="LightGray" />
+                    </viewModel:CustomAnimatedView>
+
+                    <viewModel:CustomAnimatedView
+                            Padding="10,0,0,0"
+                            HeightRequest="52"
+                            BackgroundColor="White"
+                            CornerRadius="5"
+                            HorizontalOptions="FillAndExpand">
+                        <viewModel:BorderlessEntry Text="{Binding Email}" TextColor="Black"
+                                FontSize="14" 
+                                Placeholder="Email"
+                                PlaceholderColor="LightGray" />
+                    </viewModel:CustomAnimatedView>
+                    <viewModel:CustomAnimatedView
+                            Padding="10,0,0,0"
+                            HeightRequest="52"
+                            BackgroundColor="White"
+                            CornerRadius="5"
+                            HorizontalOptions="FillAndExpand">
+                        <viewModel:BorderlessEntry Text="{Binding Password}" TextColor="Black"
+                                FontSize="14"
+                                IsPassword="True"
+                                Placeholder="Password"
+                                PlaceholderColor="LightGray" />
+                    </viewModel:CustomAnimatedView>
+                    <viewModel:CustomAnimatedView
+                            Padding="10,0,0,0"
+                            HeightRequest="52"
+                            BackgroundColor="White"
+                            CornerRadius="5"
+                            HorizontalOptions="FillAndExpand">
+                        <viewModel:BorderlessEntry TextColor="Black" Text="{Binding ConfirmPassword}"
+                                FontSize="14"
+                                IsPassword="True"
+                                Placeholder="Confirm Password"
+                                PlaceholderColor="LightGray" />
+                    </viewModel:CustomAnimatedView>
+
+                    <Button Command="{Binding SignUpCommand}"
+                            Margin="0,20,0,0"
+                            BackgroundColor="#3D618A"
+                            FontAttributes="Bold"
+                            Text="SIGN Up"
+                            TextColor="White"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+
+
+                    <StackLayout Orientation="Horizontal" Spacing="0" Margin="0,0,10,0" HorizontalOptions="CenterAndExpand">
+                        <Label Text="Already have an account?" FontSize="14" TextColor="#3D618A" />
+                        <Label Text=" LOGIN" FontAttributes="Bold" FontSize="15" TextColor="#3D618A" >
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding LoginCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+
+                </StackLayout>
+
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>
